@@ -9,3 +9,21 @@ Requires the ```grep```, ```strings```and ```file``` unix utilities
 Requires the following python libraries:
 - magic
 - termcolor
+
+```
+usage: toby.py [-h] [-i] -s string -d directory
+
+Toby
+
+optional arguments:
+  -h, --help    show this help message and exit
+  -i            Ignore case distinctions
+  -s string     String to search for
+  -d directory  Directory to search
+```
+
+Example:
+
+```python toby,py -s 'iptables' -d /dir/of/extracted/firmware'```
+
+
