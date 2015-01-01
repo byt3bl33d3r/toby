@@ -24,6 +24,6 @@ optional arguments:
 
 Example:
 
-```python toby,py -s 'iptables' -d /dir/of/extracted/firmware'```
+```python toby.py -s 'iptables' -d /dir/of/extracted/firmware```
 
 
