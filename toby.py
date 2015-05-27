@@ -19,16 +19,11 @@ for root, dirs, files in os.walk(args.directory):
 			filepath = root + '/' + file
 			if os.path.exists(filepath):
 
-				with magic.Magic() as m:
-					filetype = m.id_filename(filepath)
+			        filetype = magic.from_file(filepath)
 
-				with magic.Magic(flags=magic.MAGIC_MIME_TYPE) as m:
-					mime = m.id_filename(filepath)
+				mime = magic.from_file(filepath, mime=True)
 
-				with magic.Magic(flags=magic.MAGIC_MIME_ENCODING) as m:
-					encoding = m.id_filename(filepath)
-
-				grep_args = ["grep", "--color=always"]
+				grep_args = ["grep","-a", "--color=always"]
 				strings_args = ["strings"]
 
 				if args.case:
@@ -36,7 +31,7 @@ for root, dirs, files in os.walk(args.directory):
 
 				#we will ignore symlinks since most of them will be broken anyway
 				if 'inode/symlink' not in mime:
-					if 'binary' in encoding:
+					if 'application' in mime:
 						strings_args.append(filepath)
 						grep_args.append(args.string)
 						p1 = Popen(strings_args , stdout=PIPE)
@@ -48,5 +43,5 @@ for root, dirs, files in os.walk(args.directory):
 
 					output = p2.communicate()[0]
 					if output:
-						print colored(filepath, 'magenta', attrs=['bold']),  colored(mime, 'blue'), colored(encoding, 'blue')
+						print colored(filepath, 'magenta', attrs=['bold']),  colored(mime, 'blue')
 						print output

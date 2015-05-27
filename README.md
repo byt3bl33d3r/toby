@@ -7,7 +7,7 @@ This tool simply aims to automate this process by identifying the filetype and r
 Requires the ```grep```, ```strings```and ```file``` unix utilities
 
 Requires the following python libraries:
-- magic
+- python-magic
 - termcolor
 
 ```
